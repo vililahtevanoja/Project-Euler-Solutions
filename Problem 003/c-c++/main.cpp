@@ -5,12 +5,10 @@
   * What is the largest prime factor of the number 600851475143 ?
   *
   * Author: Vili Lähtevänoja
-  *
-  * The solution finds the answer fast, but doesn't really FINISH with the answer in a reasonable time,
-  * need to improve perhaps.
   **/
 
 #include <stdio.h>
+#include <math.h>
 
 bool isPrime(long long num);
 
@@ -26,16 +24,15 @@ int main(void) {
 			printf("%lld, ", largestPrime);
 		}
 		i += 2;
-	} while (i <= NUM / 2);
-	printf("Result: %lld\n", largestPrime);
+	} while (i <= fabs(sqrt((double)NUM)));
+	printf("\nResult: %lld\n", largestPrime);
 	getchar();
 }
 
 bool isPrime(long long num) {
-	for (long long i = 2; i < (num / 2); i++) {
+	for (long long i = 2; i <= fabs(sqrt((double)num)); i++) {
 		if (num % i == 0)
 			return false;
 	}
 	return true;
 }
-

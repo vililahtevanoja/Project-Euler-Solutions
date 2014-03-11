@@ -8,6 +8,7 @@
   */
 
 #include <stdio.h>
+#include <math.h>
 
 bool isPrime(long long num);
 
@@ -26,13 +27,9 @@ void main(void) {
 }
 
 bool isPrime(long long num) {
-	long long i;
-	for (i = 2; i <= num; i++) {
-		if (num % i == 0) 
-			break;
+	for (long long i = 2; i <= fabs(sqrt((double)num)); i++) {
+		if (num % i == 0)
+			return false;
 	}
-	if (i == num)
-		return true;
-	else
-		return false;
+	return true;
 }
