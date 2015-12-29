@@ -1,0 +1,2 @@
+cc problem011.c -o problem011
+./problem011
