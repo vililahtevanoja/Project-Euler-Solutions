@@ -8,29 +8,28 @@
 ///
 /// Slow way of doing prime factorization, should implement proper algorithm?
 
-let isPrime (n : bigint) =
-    if (n % bigint(2) = bigint(0)) then
+let sqrt2uint64 = float >> sqrt >> uint64
+
+let isPrime n =
+    if (n % 2UL = 0UL) then
         false
     else
-        seq { bigint(3) .. bigint(sqrt(float n)) }
-        |> Seq.exists (fun x -> if (n % x = bigint(0)) then true else false)
+        seq { 3UL .. sqrt2uint64 n }
+        |> Seq.exists (fun x -> if (n % x = 0UL) then true else false)
         |> not
 
-let rec gcd x y =
-     if y = 0 then
-        x
-     else
-        gcd y (x % y)
-
+#time;;
 let problem003 = 
-    let isDividor (i : bigint) (n : bigint) = 
-        if (i % n = bigint(0)) then true else false
+    let isDividor i n = 
+        if (i % n = 0UL) then true else false
 
-    let calculatePrimeFactors (n : bigint) =
-        [bigint(2) .. bigint(sqrt (float n))]
+    let calculatePrimeFactors (n) =
+        [2UL .. sqrt2uint64 n]
         |> List.filter (fun x -> (isPrime x) && (isDividor n x) ) 
 
-    let calculateLargestPrimeFactor (n : bigint) =
+    let calculateLargestPrimeFactor n =
         calculatePrimeFactors n
         |> List.max
-    calculateLargestPrimeFactor (bigint(600851475143UL))
+    let res = calculateLargestPrimeFactor 600851475143UL
+    printfn "Result: %i" res
+#time;;
